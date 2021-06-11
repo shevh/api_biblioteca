@@ -9,13 +9,20 @@ const app = express()
 const con = mongoose.connection
 
 con.on('open', () => {
-    console.log('connected...')
+    console.log('Conectado')
 })
 
 app.use(express.json())
 
+const authorRouter = require('./routes/author')
 const bookRouter = require('./routes/book')
+const bookinstanceRouter = require('./routes/bookinstance')
+const genreRouter = require('./routes/genre')
+
+app.use('/authors',authorRouter)
 app.use('/books',bookRouter)
+app.use('/bookinstances',bookinstanceRouter)
+app.use('/genres',genreRouter)
 
 app.listen(9000, () => {
     console.log('Server started')
